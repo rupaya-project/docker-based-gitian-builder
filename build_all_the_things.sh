@@ -20,10 +20,14 @@ get_latest_tag () {
   echo ${response[0]}
 }
 
-check_mac () {
-  if [[ "${1}" == "osx" ]] && [[ ! -f "$THISDIR/cache/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz" ]]; then
-    echo -e "${magenta}Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz does not exist in cache therefore OSX build not available.${reset}"
-    exit -1
+check_mac() {
+  if [[ "${1}" == "osx" ]]; then
+    if [[ ! -f "$THISDIR/cache/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz" ]]; then
+      echo -e "${magenta}Downloading SDK for OSX build...${reset}"
+      wget -P "$THISDIR/cache" https://bitcoincore.org/depends-sources/sdks/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz
+    fi
+    
+    echo -e "${magenta}SDK for OSX build found.${reset}"
   fi
 }
 
