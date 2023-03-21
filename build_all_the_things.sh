@@ -27,7 +27,7 @@ check_mac () {
   fi
 }
 
-fall_back_branch_or_tag="v1.14.1rc2"
+fall_back_branch_or_tag="5980"
 branch_or_tag=
 if [ -z "${1}" ]; then
   branch_or_tag=`get_latest_tag`

@@ -32,7 +32,7 @@ RUN mkdir /home/ubuntu/ && \
 ARG BUILD_ARG
 RUN if [ "$BUILD_ARG" = *"osx"* ]; then \
     mkdir /shared/gitian-builder/inputs/ && \
-    wget https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz -O /shared/gitian-builder/inputs/MacOSX10.14.sdk.tar.gz; \
+    wget https://bitcoincore.org/depends-sources/sdks/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz -O /shared/gitian-builder/inputs/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz; \
     fi
 
 # Set the user to root and create a script to run the build process
