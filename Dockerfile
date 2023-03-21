@@ -43,5 +43,5 @@ RUN printf "[[ -d /shared/rupaya ]] || \
     ./bin/gbuild --skip-image --commit rupaya=\$1 --url rupaya=\$2 \$3" > /root/runit.sh
 
 # Default command and entrypoint
-CMD ["5980","https://github.com/rupaya-project/rupaya","../rupaya/contrib/gitian-descriptors/gitian-linux.yml"]
+CMD ["5980","https://github.com/rupaya-project/rupaya","../rupaya/contrib/gitian-descriptors/gitian-osx.yml"]
 ENTRYPOINT ["sudo","bash", "/root/runit.sh"]
