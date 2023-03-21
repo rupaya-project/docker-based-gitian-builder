@@ -1,5 +1,5 @@
 FROM ubuntu:bionic
-MAINTAINER Chris Kleeschulte <chrisk@bitpay.com>
+MAINTAINER mo-bay <aasim@brupaya.io>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -20,6 +20,10 @@ RUN apt-get update \
 RUN locale-gen en_US.UTF-8 \
   && update-locale LANG=en_US.UTF-8
 
+# Create a new user with appropriate user and group IDs
+RUN groupadd -r -g 1000 ubuntu \
+  && useradd -r -u 1000 -g 1000 -d /home/ubuntu -s /bin/bash ubuntu
+
 # Clone gitian-builder if it doesn't exist
 RUN git clone https://github.com/rupaya-project/gitian-builder /shared/gitian-builder \
   || echo "gitian-builder already exists"
@@ -34,10 +38,6 @@ RUN echo 'ubuntu ALL=(root) NOPASSWD:/usr/bin/apt-get,/shared/gitian-builder/tar
   && chown root:root /shared/gitian-builder/target-bin/grab-packages.sh \
   && chmod 755 /shared/gitian-builder/target-bin/grab-packages.sh
 
-# Create ubuntu user and set ownership of home directory
-RUN useradd -d /home/ubuntu -m -s /bin/bash ubuntu \
-  && chown -R ubuntu:ubuntu /home/ubuntu
-
 # Switch to ubuntu user
 USER ubuntu
 
@@ -50,4 +50,5 @@ cd /shared/gitian-builder; \
 
 ENTRYPOINT ["bash", "/home/ubuntu/runit.sh"]
 CMD ["5980","https://github.com/rupaya-project/rupaya","../rupaya/contrib/gitian-descriptors/gitian-linux.yml"]
+
 
