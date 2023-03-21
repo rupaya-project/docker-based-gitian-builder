@@ -1,5 +1,5 @@
 FROM ubuntu:bionic
-MAINTAINER mo-bay <aasim@brupaya.io>
+MAINTAINER mo-bay <aasim@rupaya.io>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -31,8 +31,9 @@ RUN git clone https://github.com/rupaya-project/gitian-builder /shared/gitian-bu
 # Set ownership of shared directory to ubuntu user
 RUN chown -R ubuntu:ubuntu /shared/
 
-# Allow ubuntu user to run apt-get and grab-packages.sh with sudo without password
-RUN echo 'ubuntu ALL=(root) NOPASSWD:/usr/bin/apt-get,/shared/gitian-builder/target-bin/grab-packages.sh' > /etc/sudoers.d/ubuntu \
+# Create the sudoers directory and allow ubuntu user to run apt-get and grab-packages.sh with sudo without password
+RUN mkdir -p /etc/sudoers.d/ \
+  && echo 'ubuntu ALL=(root) NOPASSWD:/usr/bin/apt-get,/shared/gitian-builder/target-bin/grab-packages.sh' > /etc/sudoers.d/ubuntu \
   && chmod 0400 /etc/sudoers.d/ubuntu \
   && chown root:root /etc/sudoers.d/ubuntu \
   && chown root:root /shared/gitian-builder/target-bin/grab-packages.sh \
