@@ -45,7 +45,7 @@ fi
 
 $THISDIR/build_builder.sh
 
-platforms=("mac" "windows" "linux")
+platforms=("osx" "win" "linux")
 
 for platform in "${platforms[@]}"; do
   check_mac "${platform}"
