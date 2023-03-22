@@ -31,7 +31,7 @@ RUN mkdir /home/ubuntu/ && \
 # Download MacOSX10.14.sdk.tar.gz if specified in build arguments
 ARG BUILD_ARG
 RUN if [ "$BUILD_ARG" = *"osx"* ]; then \
-    mkdir /shared/gitian-builder/inputs/ && \
+    mkdir -p /shared/gitian-builder/inputs/ && \
     wget https://bitcoincore.org/depends-sources/sdks/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz -O /shared/gitian-builder/inputs/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz; \
     fi
 
